@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<School type="king" loc="东北">
+    <Student type="一般" loc="上海">
+        <!-- 这是一个注释 -->
+        <![CDATA[select * from emp where age=18]]>
+
+        <name type="英文名">mrking</name>
+        <age type="法定年龄">11</age>
+        <score> English&gt;80 </score>
+    </Student>
+
+</School>

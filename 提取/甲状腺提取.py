@@ -14,7 +14,7 @@ class A:
 
         # 此列表用来存所有行中的数据
         l1=list()
-        for i in w1['A']:
+        for i in w1['B']:
             #print(i.value,end="\n")
             l1.append(i.value)
 
@@ -22,23 +22,32 @@ class A:
         # 此列表用来存拆分后的数据
         l2=list()
         for j in l1:
-            l3=j.split('。')
-            for i in l3:
-                if i=="":
-                    l3.remove(i)
-                # if i[0].isalpha():
-                #     l3.remove(i)
-            l2.append(l3)
+            if j[0]=="。":
+                j=j[1:]
+            if j[0]=="肝":
+                l3=j.split('。')
+                for i in l3:
+                    if i=="":
+                        l3.remove(i)
+                        # if i[0].isalpha():
+                        #     l3.remove(i)
+                    l2.append(l3)
+        d = 1
+        l4 = list()
+        t1=""
 
-        # 此列表用来存甲开头的数据
-        l4=list()
-        for m in l2:
-            for n in m:
-                #print(n)
-                if n!="":
-                    if len(n) >2:
-                        if n[0] =='甲':
-                            l4.append(n)
+        for i in l2:
+
+            #l22.append()
+            for m in i:
+                if m!="":
+                    if len(m) >2:
+                        if m[0] =='甲':
+                            t= str(w1['A{0}'.format(d)].value) + m
+
+                            l4.append(t)
+            d=d+1
+
 
         # 开始写入
 
@@ -48,8 +57,15 @@ class A:
         #l5=list()
         print("开始写入")
 
-        Sheet1.append(l4)
+        # 行数很少时可以使用
+        #Sheet1.append(l4)
 
+        l=len(l4)
+        m=1
+        for i in l4:
+
+            Sheet1['A{0}'.format(m)]=i
+            m=m+1
 
         print("写入完成")
 

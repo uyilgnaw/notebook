@@ -1,3 +1,5 @@
 
-s="网鲤鱼"
-print(s.isalpha())
+s=(1,2,3,4,5)
+s1=list(s)
+print(s1)
+
