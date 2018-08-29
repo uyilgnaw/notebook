@@ -42,4 +42,20 @@
                 - 一旦更改请求方法，请注意其它请求头部信息相适应
             - urllib.parse.urlencode可以将字符串自动转换成上面的格式
             - 案例04
+            - 为了更多的设置请求信息，单纯的通过urlopen函数已经不够
+            - 需要利用request.Request类
+            - 案例在04的注释中
+- urllib.error
+    - URLError产生的原因：
+        - 没网
+        - 服务器连接失败
+        - 案例05
+    - HTTPError是URLError的一个子类
+        - 案例06
+
+    - 两者的区别在于：
+        - HTTPError是对应的HTTP请求的返回码错误，如果返回错误码是400以上，则引发HTTPError
+        - URLError对应的一般是网络出现问题，包括url问题
+        - 关系区别：OSError-URLError—HTTPError
+
 
