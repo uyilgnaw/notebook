@@ -124,75 +124,76 @@ if __name__ == "__main__":
     # print 'c = ', c
     # # #
     # # 和linspace类似，logspace可以创建等比数列
-    # # 下面函数创建起始值为10^1，终止值为10^2，有20个数的等比数列
+    # # 下面函数创建起始值为10^1，终止值为10^2，有10个数的等比数列
     # d = np.logspace(1, 2, 10, endpoint=True)
     # print d
     # # #
-    # # # 下面创建起始值为2^0，终止值为2^10(包括)，有10个数的等比数列
+    # # # 下面创建起始值为2^0，终止值为2^10(包括)，有11个数的等比数列
     # f = np.logspace(0, 10, 11, endpoint=True, base=2)
     # print f
     # # #
     # # # 使用 frombuffer, fromstring, fromfile等函数可以从字节序列创建数组
-    s = 'abcd'
-    g = np.fromstring(s, dtype=np.int8)
-    print (g)
+    # s = 'abcd'
+    # g = np.fromstring(s, dtype=np.int8)
+    # print (g)
     # #
     # 3.存取
     # 3.1常规办法：数组元素的存取方法和Python的标准方法相同
     # a = np.arange(10)
-    # print a
-    # # # 获取某个元素
-    # print a[3]
-    # # # # 切片[3,6)，左闭右开
-    # print a[3:6]
-    # # # # 省略开始下标，表示从0开始
-    # print a[:5]
-    # # # # 下标为负表示从后向前数
-    # print a[3:]
-    # # # # 步长为2
-    # print a[1:9:2]
+    # print (a)
+    # # # # 获取某个元素
+    # print (a[3])
+    # # # # # 切片[3,6)，左闭右开
+    # # print a[3:6]
+    # # # # # 省略开始下标，表示从0开始
+    # # print a[:5]
+    # # # # # 下标为负表示从后向前数
+    # # print a[3:]
+    # # # # # 步长为2
+    # # print a[1:9:2]
     # # # # 步长为-1，即翻转
-    # print a[::-1]
-    # # # # 切片数据是原数组的一个视图，与原数组共享内容空间，可以直接修改元素值
+    # print (a[::-1])
+    # # # # # 切片数据是原数组的一个视图，与原数组共享内容空间，可以直接修改元素值
     # a[1:4] = 10, 20, 30
-    # print a
+    # print (a)
     # # # # 因此，在实践中，切实注意原始数据是否被破坏，如：
     # b = a[2:5]
     # b[0] = 200
-    # print a
-    #
-    # # 3.2 整数/布尔数组存取
-    # # 3.2.1
-    # 根据整数数组存取：当使用整数序列对数组元素进行存取时，
-    # 将使用整数序列中的每个元素作为下标，整数序列可以是列表(list)或者数组(ndarray)。
-    # 使用整数序列作为下标获得的数组不和原始数组共享数据空间。
+    # print (a)
+    # #
+    # # # 3.2 整数/布尔数组存取
+    # # # 3.2.1
+    # # 根据整数数组存取：当使用整数序列对数组元素进行存取时，
+    # # 将使用整数序列中的每个元素作为下标，整数序列可以是列表(list)或者数组(ndarray)。
+    # # 使用整数序列作为下标获得的数组不和原始数组共享数据空间。
     # a = np.logspace(0, 9, 10, base=2)
-    # print a
+    # print (a)
     # i = np.arange(0, 10, 2)
-    # print i
-    # # # # 利用i取a中的元素
+    # print (i)
+    # # # # # 利用i取a中的元素
     # b = a[i]
-    # print b
+    # print (b)
     # # # b的元素更改，a中元素不受影响
     # b[2] = 1.6
-    # print b
-    # print a
+    # print (b)
+    # print (a)
 
     # # 3.2.2
     # 使用布尔数组i作为下标存取数组a中的元素：返回数组a中所有在数组b中对应下标为True的元素
     # # 生成10个满足[0,1)中均匀分布的随机数
     # a = np.random.rand(10)
-    # print a
+    # print ('生成10个满足[0,1)中均匀分布的随机数',a)
     # # # 大于0.5的元素索引
-    # print a > 0.5
+    # print ('大于0.5的元素索引',a > 0.5)
     # # # # 大于0.5的元素
     # b = a[a > 0.5]
-    # print b
+    # print ('大于0.5的元素',b)
     # # # # 将原数组中大于0.5的元素截取成0.5
-    # a[a > 0.5] = 0.5
-    # print a
+    # b[0] = 0.5
+    # print (a)
     # # # # b不受影响
-    # print b
+    # print (b)
+    # 简单来说就是由数组或列表进行更改数据时会生成一个新的数组，不会共享内存，互不影响。
 
     # 3.3 二维数组的切片
     # [[ 0  1  2  3  4  5]
@@ -202,22 +203,26 @@ if __name__ == "__main__":
     #  [40 41 42 43 44 45]
     #  [50 51 52 53 54 55]]
     # a = np.arange(0, 60, 10)    # 行向量
-    # print 'a = ', a
+    # print ('a = ', a)
     # b = a.reshape((-1, 1))      # 转换成列向量
-    # print b
+    # print (b)
     # c = np.arange(6)
-    # print c
+    # print (c)
     # f = b + c   # 行 + 列
-    # print f
+    # print (f)
     # # 合并上述代码：
     # a = np.arange(0, 60, 10).reshape((-1, 1)) + np.arange(6)
-    # print a
+    # print (a)
     # # 二维数组的切片
-    # print a[(0,1,2,3), (2,3,4,5)]
-    # print a[3:, [0, 2, 5]]
+    # # 取第一（0）行中的第3（2）个元素，以此类推
+    # print ('第一个输出为',a[(0,1,2,3), (2,3,4,5)])
+    # print ('第二个输出为',a[3:, [0, 2, 5]])
     # i = np.array([True, False, True, False, False, True])
-    # print a[i]
-    # print a[i, 3]
+    # print(i)
+    # # 将布尔数组传入到二维数组中，是将为True的那一行取出来，False不取
+    # print ('第三个输出为',a[i])
+    # # 将布尔数组传入到二维数组中，将为True的那一行取出来，3代表了再将上一步取出的数据取角标为3的列
+    # print ('第四个输出为',a[i, 3])
 
     # # 4. numpy与Python数学库的时间比较
     # for j in np.logspace(0, 7, 10):
@@ -232,7 +237,8 @@ if __name__ == "__main__":
     #     for i, t in enumerate(x):
     #         x[i] = math.sin(t)
     #     t2 = time.clock() - start
-    #     print j, ": ", t1, t2, t2/t1
+    #     print (j, ": ", t1, t2, t2/t1)
+    # 总结：numpy在数据量大的时候运行速度显比python直接计算要快10倍左右
 
     # 5.绘图
     # 5.1 绘制正态分布概率密度函数
@@ -240,15 +246,15 @@ if __name__ == "__main__":
     # sigma = 1
     # x = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 50)
     # y = np.exp(-(x - mu) ** 2 / (2 * sigma ** 2)) / (math.sqrt(2 * math.pi) * sigma)
-    # print x.shape
-    # print 'x = \n', x
-    # print y.shape
-    # print 'y = \n', y
+    # print (x.shape)
+    # print ('x = \n', x)
+    # print (y.shape)
+    # print ('y = \n', y)
     # # plt.plot(x, y, 'ro-', linewidth=2)
     # plt.plot(x, y, 'r-', x, y, 'go', linewidth=2, markersize=8)
     # plt.grid(True)
     # plt.show()
-
+    # 加上下面的两句话就可以显示中文，否则不能显示中文
     # matplotlib.rcParams['font.sans-serif'] = [u'SimHei']  #FangSong/黑体 FangSong/KaiTi
     # matplotlib.rcParams['axes.unicode_minus'] = False
 
@@ -371,35 +377,35 @@ if __name__ == "__main__":
     # plt.show()
 
     # 7. 绘制三维图像
-    # x, y = np.ogrid[-3:3:100j, -3:3:100j]
-    # # u = np.linspace(-3, 3, 101)
-    # # x, y = np.meshgrid(u, u)
+    x, y = np.ogrid[-3:3:100j, -3:3:100j]
+    # u = np.linspace(-3, 3, 101)
+    # x, y = np.meshgrid(u, u)
+    z = x*y*np.exp(-(x**2 + y**2)/2) / math.sqrt(2*math.pi)
     # z = x*y*np.exp(-(x**2 + y**2)/2) / math.sqrt(2*math.pi)
-    # # z = x*y*np.exp(-(x**2 + y**2)/2) / math.sqrt(2*math.pi)
-    # fig = plt.figure()
-    # ax = fig.add_subplot(111, projection='3d')
-    # # ax.plot_surface(x, y, z, rstride=5, cstride=5, cmap=cm.coolwarm, linewidth=0.1)  #
-    # ax.plot_surface(x, y, z, rstride=5, cstride=5, cmap=cm.Accent, linewidth=0.5)
-    # plt.show()
-    # # cmaps = [('Perceptually Uniform Sequential',
-    # #           ['viridis', 'inferno', 'plasma', 'magma']),
-    # #          ('Sequential', ['Blues', 'BuGn', 'BuPu',
-    # #                          'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd',
-    # #                          'PuBu', 'PuBuGn', 'PuRd', 'Purples', 'RdPu',
-    # #                          'Reds', 'YlGn', 'YlGnBu', 'YlOrBr', 'YlOrRd']),
-    # #          ('Sequential (2)', ['afmhot', 'autumn', 'bone', 'cool',
-    # #                              'copper', 'gist_heat', 'gray', 'hot',
-    # #                              'pink', 'spring', 'summer', 'winter']),
-    # #          ('Diverging', ['BrBG', 'bwr', 'coolwarm', 'PiYG', 'PRGn', 'PuOr',
-    # #                         'RdBu', 'RdGy', 'RdYlBu', 'RdYlGn', 'Spectral',
-    # #                         'seismic']),
-    # #          ('Qualitative', ['Accent', 'Dark2', 'Paired', 'Pastel1',
-    # #                           'Pastel2', 'Set1', 'Set2', 'Set3']),
-    # #          ('Miscellaneous', ['gist_earth', 'terrain', 'ocean', 'gist_stern',
-    # #                             'brg', 'CMRmap', 'cubehelix',
-    # #                             'gnuplot', 'gnuplot2', 'gist_ncar',
-    # #                             'nipy_spectral', 'jet', 'rainbow',
-    # #                             'gist_rainbow', 'hsv', 'flag', 'prism'])]
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    # ax.plot_surface(x, y, z, rstride=5, cstride=5, cmap=cm.coolwarm, linewidth=0.1)  #
+    ax.plot_surface(x, y, z, rstride=5, cstride=5, cmap=cm.Accent, linewidth=0.5)
+    plt.show()
+    # cmaps = [('Perceptually Uniform Sequential',
+    #           ['viridis', 'inferno', 'plasma', 'magma']),
+    #          ('Sequential', ['Blues', 'BuGn', 'BuPu',
+    #                          'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd',
+    #                          'PuBu', 'PuBuGn', 'PuRd', 'Purples', 'RdPu',
+    #                          'Reds', 'YlGn', 'YlGnBu', 'YlOrBr', 'YlOrRd']),
+    #          ('Sequential (2)', ['afmhot', 'autumn', 'bone', 'cool',
+    #                              'copper', 'gist_heat', 'gray', 'hot',
+    #                              'pink', 'spring', 'summer', 'winter']),
+    #          ('Diverging', ['BrBG', 'bwr', 'coolwarm', 'PiYG', 'PRGn', 'PuOr',
+    #                         'RdBu', 'RdGy', 'RdYlBu', 'RdYlGn', 'Spectral',
+    #                         'seismic']),
+    #          ('Qualitative', ['Accent', 'Dark2', 'Paired', 'Pastel1',
+    #                           'Pastel2', 'Set1', 'Set2', 'Set3']),
+    #          ('Miscellaneous', ['gist_earth', 'terrain', 'ocean', 'gist_stern',
+    #                             'brg', 'CMRmap', 'cubehelix',
+    #                             'gnuplot', 'gnuplot2', 'gist_ncar',
+    #                             'nipy_spectral', 'jet', 'rainbow',
+    #                             'gist_rainbow', 'hsv', 'flag', 'prism'])]
 
     # 8.1 scipy
     # 线性回归例1
