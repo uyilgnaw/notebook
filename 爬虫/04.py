@@ -15,13 +15,16 @@ def fanyi():
     data=parse.urlencode(data).encode('utf-8')
     #print(type(data))
 
-    # headers={
-    #     'Context-Length' : len(data)
-    #
-    # }
+    headers={
+        'Context-Length' : len(data)
 
-    rsp=request.urlopen(baseurl,data=data)
+    }
+    # 此处添加一个Request类实例来封装headers
+    req=request.Request(url=baseurl,data=data,headers=headers)
 
+    #rsp=request.urlopen(baseurl,data=data)
+    # 此处返回的值就为Request类的实例
+    rsp=request.urlopen(req)
     json_data=rsp.read().decode('utf-8')
 
     #print(type(json_data))

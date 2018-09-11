@@ -58,4 +58,5 @@
         - URLError对应的一般是网络出现问题，包括url问题
         - 关系区别：OSError-URLError—HTTPError
 
-
+- UserAgent
+    - UserAgent: 用户代理，
