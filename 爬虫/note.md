@@ -59,4 +59,69 @@
         - 关系区别：OSError-URLError—HTTPError
 
 - UserAgent
-    - UserAgent: 用户代理，
+    - UserAgent: 用户代理，简称UA，属于heads的一部分，服务器通过UA来判断访问者身份
+    - 常见的UA值，使用的时候可以直接复制粘贴，也可以用浏览器访问的时候抓包
+
+
+      1.Android
+
+      Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Safari/535.19
+      Mozilla/5.0 (Linux; U; Android 4.0.4; en-gb; GT-I9300 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30
+      Mozilla/5.0 (Linux; U; Android 2.2; en-gb; GT-P1000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+
+      2.Firefox
+
+      Mozilla/5.0 (Windows NT 6.2; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0
+      Mozilla/5.0 (Android; Mobile; rv:14.0) Gecko/14.0 Firefox/14.0
+
+      3.Google Chrome
+
+      Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36
+      Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19
+
+      4.iOS
+
+      Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3
+      Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A101a Safari/419.3
+
+
+
+- 设置UA可以通过两种方式
+    - heads
+    - add_header
+    - 案例07
+
+- ProxyHandler处理（代理服务器）
+
+    - 使用代理IP，是爬虫的常用手段
+    - 获取代理服务器的地址：
+        - www.xicidaili.com
+        - www.goubanjia.com
+    - 代理用来隐藏真实访问IP，代理也不允许频繁访问某一个固定的网站，所以代理要很多
+    - 基本使用步骤：
+        - 设置代理地址
+        - 创建ProxyHandler
+        - 创建Opener
+        - 安装Opener
+    - 案例08
+
+- cookie 和 session
+
+    -  由于http协议的无记忆性，所以有了一个补充协议
+    - cookie是给用户的（即http浏览器）的一段信息，session是保存在服务器上的对应的另一半的信息，用来纪录用户详细信息
+- cookie和session的区别
+    - 存放位置不同
+    - cookie不安全
+    - session会保存在服务器上一定时间，会过期
+    - 单个cookie保存数据不超过4k，很多浏览器限制一个站点最多保存20个cookie（不是所有浏览器都限制）
+
+- session的存放位置
+    - 存放在服务器上
+    - 一般情况下，session是放在内存中或者数据库中的
+- 没有cookie登陆 案例09。没使用cookie反馈结果为未登录状态
+
+- 使用cookie登陆
+    - 直接把cookie复制下来，然后手动放入请求头，案例10
+
+
+
