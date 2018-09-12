@@ -122,6 +122,35 @@
 
 - 使用cookie登陆
     - 直接把cookie复制下来，然后手动放入请求头，案例10
+    - http模块包含一些关于cookie的模块，通过他们我们可以自动使用cookie
+        - CookieJar
+            - 管理存储Cookie，向传出的http请求添加cookie
+            - cookie存在于内存中，CookieJar实例回收后cookie将消失
+        - FileCookieJar(filename,delayload=None,policy=None):
+            - 使用文件管理cookie
+            - filename为保存cookie的文件
+        - MozillaCookieJar(filename,delaylocad=None,policy=None)：
+            - 创建与mocilla浏览器cookie.txt兼容的FileCookieJar实例
+        - LwpCookieJar(filename,delayload=None,policy=None):
+            - 创建与libwww-perl标准兼容的Set-Cookie3格式的filecookiejar实例
+        - 他们的关系是：CookieJar-->FileCookieJar-->MozillaCookieJar&LwpCookieJar
+    - 利用cookiejar访问人人网
+        - 案例11
+        - 1.自动使用cookie进行登陆，
+        - 2.打开登陆界面后自动通过用户名密码登陆
+        - 3.自动提取反馈回来的cookie
+        - 4.利用提取的cookie登陆隐私界面
+
+    - handler是Handler的实例，
+    - 将cookie作为一个变量，打印出来
+        - 案例12
+- SSL
+    - ssl证书就是指遵守SSL安全套接层协议的服务器数字证书（SercureSocketLayer）
+    - CA是数字证书认证中心，是发放、管理和废除数字证书的收信人的第三方机构
+    - 遇到不信任的SSl证书，需要单独进行处理
+        - 案例13
+
+
 
 
 
