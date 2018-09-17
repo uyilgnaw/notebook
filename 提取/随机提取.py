@@ -4,11 +4,12 @@ import openpyxl
 class A:
 
     def ran(self):
-        e1=openpyxl.load_workbook(filename="C:/Users/meridian/Desktop/随机/42_41.xlsx",read_only=True)
+        e1=openpyxl.load_workbook(filename="C:/Users/meridian/Desktop/随机/待随机.xlsx",read_only=True)
         w1=e1.active
         l1=list(w1.rows)
         l2=list()
         print(len(l1))
+        # 随机次数
         for m in range(200):
             l3 = list()
             r1=random.randint(0,len(l1)-1)
@@ -27,7 +28,7 @@ class A:
 
             w2.append(i)
             #print(w2['A{0}'.format(i)].value)
-        e2.save("C:/Users/meridian/Desktop/随机/已随机42_41.xlsx")
+        e2.save("C:/Users/meridian/Desktop/随机/已随机.xlsx")
 
 if __name__ == '__main__':
     a=A()

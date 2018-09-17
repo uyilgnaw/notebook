@@ -67,8 +67,10 @@ def read():
         w2.append(i)
         print('已经合并了{0}行'.format(p))
 
+    print('合并完成')
+    print('正在保存')
     e2.save("C:/Users/meridian/Desktop/提取练习/已合并.xlsx")
-
+    print('保存完成')
 
 
 read()

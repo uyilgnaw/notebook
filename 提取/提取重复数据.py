@@ -3,8 +3,8 @@ import datetime
 # 此程序可处理超过20万行的工作表。
 class A():
     def read(self):
-        e1=openpyxl.load_workbook(filename='C:/Users/meridian/Desktop/提取练习/待提取2.xlsx',read_only=True)
-        w1=e1["Sheet1"]
+        e1=openpyxl.load_workbook(filename='C:/Users/meridian/Desktop/提取练习/待提取.xlsx',read_only=True)
+        w1=e1.active
 
         Maxr=w1.max_row
         Maxc=w1.max_column
@@ -49,7 +49,7 @@ class A():
 
             print('已经找到写入了{0}'.format(p))
 
-        e2.save("C:/Users/meridian/Desktop/提取练习/已提取2.xlsx")
+        e2.save("C:/Users/meridian/Desktop/提取练习/已提取.xlsx")
 
 
 
@@ -64,4 +64,4 @@ if __name__ == '__main__':
     # 记录程序结束时间
     endtime=datetime.datetime.now()
     # 记录程序运行了多少秒
-    print(endtime-starttime).seconds
+    print(endtime-starttime,'秒')

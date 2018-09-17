@@ -1,5 +1,12 @@
+import hashlib
 
-s=(1,2,3,4,5)
-s1=list(s)
-print(s1)
+def getMD5(v):
+    md5 = hashlib.md5()
 
+    md5.update(v.encode("utf-8"))
+
+    sign = md5.hexdigest()
+
+    return sign
+
+print(getMD5('mrking'))
