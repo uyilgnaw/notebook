@@ -5,8 +5,11 @@ if __name__ == '__main__':
 
     rsp = request.urlopen(url)
 
-    html = rsp.read().decode("utf - 8")
+    html = rsp.read()
 
-    with open ("rsp.html","w") as f:
+    html = html.decode()
+
+    # print(html)
+    with open ("rsp.html","w",encoding = 'utf -8') as f:
         f.write(html)
 

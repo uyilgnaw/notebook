@@ -5,7 +5,7 @@ from urllib import request
 '''
 
 if __name__ == '__main__':
-    url='https://www.youtube.com/watch?v=oDN-sLWkzcc'
+    url='http://fanyi.baidu.com/sug'
     # 打开相应url并把相应页面作为返回
 
     rsp=request.urlopen(url)
