@@ -35,7 +35,13 @@ def fanyi():
     rsp=request.urlopen(req)
 
     html = rsp.read().decode('unicode-escape')
-    print(html)
+    # print(html)
+    # print(type(html))
+    html = json.loads(html)
+
+    # print(type(html))
+    print('翻译结果为：')
+    print(html['trans'][0]['dst'])
 
 
 

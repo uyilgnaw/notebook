@@ -39,7 +39,7 @@ def fanyi():
     json_data=json.loads(json_data)
 
     #print(type(json_data))
-    print(json_data)
+   # print(json_data)
     print('翻译结果为')
     for i in json_data['data']:
 
