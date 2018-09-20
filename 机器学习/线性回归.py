@@ -91,7 +91,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=1)
 # print(y_train)
 
 # print(x_test)
-#
+print(len(x_test))
 # print(y_test)
 
 # 此处引入线性回归模型
@@ -100,12 +100,12 @@ linreg = LinearRegression()
 # fit进行计算，x_train，y_train以矩阵的方式传入，其中有sample_weight参数则是每条测试数据的权重，同样以array格式传入
 model = linreg.fit(x_train, y_train)
 
-# print(model)
+print(model)
 # # 回归系数
 # print(linreg.coef_)
 # # 截距
 # print(linreg.intercept_)
-
+# 预测结果
 y_hat = linreg.predict(np.array(x_test))
 
 # 均方误差（越小越好）
@@ -132,4 +132,5 @@ plt.show()
 上面的试验中，当输入的特征指标中不包含newspaper时 ，生成的均方误差和均方根误差比包含newspaper小
 也就是说更加精确
 需要注意的是，首先要分析原始数据，去除不必要的特征值。才能使模型更加精确，预测的更加精准
+并不是说特征越多，预测的结果越好
 '''
