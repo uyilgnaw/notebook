@@ -65,3 +65,4 @@ if __name__ == '__main__':
     endtime=datetime.datetime.now()
     # 记录程序运行了多少秒
     print(endtime-starttime,'秒')
+    print('提取完成！')

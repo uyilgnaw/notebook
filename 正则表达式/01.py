@@ -8,7 +8,7 @@ print(s)
 s = r'ABC\001'
 print(s)
 
-r = re.match(r'\d{3}-\d{3,8}$','010-123456')
+r = re.match(r'\.\d{3}-\d{3,8}$','.010-123456')
 print(r)
 '''
 match() 方法判断是否匹配，如果匹配成功，返回一个match对象，否则返回None。

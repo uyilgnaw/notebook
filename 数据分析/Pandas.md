@@ -1,0 +1,195 @@
+# pandas的数据结构
+    - Series：
+        - Series是一种类似于一维数组的对象，他由一组数据（各种Numpy数据类型)以及一组与之相关的数据标签组成。
+        - Series的字符串表先形式为：索引在左边，值在右边。可以通过values和index属性访问这两个数据对象
+        - 可以通过索引的方式进行数组数据的单个访问
+        - numpy数组运算（如根据布尔型数组进行过滤、标量乘法、应用数学函数等）都会保留索引和值之间的连接
+        - 还可以将Series看成是一个定长的有序字典，以为它是索引值到数据值的一个映射。他可以用在许多原本需要字典参数的函数中
+        - 如果数据存放在一个Python字典中，也可以直接通过这个字典来创建Series
+        - 如果只传入一个字典，则结果Series中的索引就是原字典的键（有序排列）
+        - pandas的isnull和notnull函数可用于检测缺失数据
+        - Series也有类似的方法isnull()
+        - Series最重要的一个功能是：它在算术运算中会自动不同索引中的数据
+        - Series对象本身及其索引都有一个name属性，该属性跟pandas其它的关键功能关系非常密切
+        - Series的索引可以通过赋值的方式就地修改
+    - DataFrame
+        - DataFrame是一个表格型的数据结构，它含有一组有序的列，每列可以是不同的值类型（数值，字符串，布尔值等）。
+        - DataFrame既有行索引也有列索引，他可以被看作由Series组成的字典（共用同一个索引）
+        - DataFrame中面向行和面向列的操作基本上是平衡的。
+        - 构建DataFrame的办法有很多，最常用的一种是直接传入一个由等长列表或Numpy数组组成的字典
+        - 如果指定了列序列，则DataFrame的列就会按照指定顺序进行排列
+        - 跟series一样，如果传入的列在数据中找不到，就会产生NA值
+        - 通过类似字典标记的方式或属性的方式，可以将DataFrame的列获取为一个Series
+        - 返回的Series拥有原DataFrame相同的索引，且其name属性也已经被相应的设置好了
+        - 将列表或数组赋值给某个列时，其长度必须跟DataFrame的长度相匹配，如果赋值的是一个Series，就会精确匹配DataFrame的索引，所有的空位都将被填上缺失值
+        - 为不存在的列赋值会创建一个新的列，关键字del可以删除新列
+        - 通过索引方式返回的列只是相应数据的视图而已，并不是副本。因此，对返回的Series所作的任何就地修改全都会反映到源DataFrame上，通过copy的方法可以进行显式的复制列
+        - 当数据形式是嵌套字典时，如果将它传给DataFrame，他就会被解释为：外层字典作为键，内层键作为行索引，也可以将结果进行转置
+    - 索引对象
+        - pandas的索引对象负责管理轴标签和其它元数据（比如轴名称）。构建Series或DataFrame时，所用到的任何数组或其它序列的标签都会被转换成一个index
+    - 基本功能
+        - 重新索引
+            - pandas对象的一个重要方法是reindex，其作用是创建一个适应新索引的新对象
+            - 调用该Series的reindex将会根据新索引顺序进行重排。如果某个索引值当前不存在，就引入缺失值
+    - 丢弃指定轴上的项
+        - drop方法返回的是一个在指定轴上删除了指定值的新对象
+    - 索引、选取和过滤
+        - Series索引（obj[]）的工作方式类似于Numpy数组的索引，只不过Series的索引值不只是整数。
+        - 对DataFrame进行索引其实就是获取一个或多个列
+        - 这种索引方式有几个特殊的情况。首先通过切片或布尔型数组选取行
+        - 为了在DataFrame的行上进行标签索引，可以引入专门的索引字段_ix。可以通过numpy式的标记法以及轴标签从DataFrame中选取行和列的子集
+    - 算术运算和数据对齐
+        - pandas最重要的一个功能是对不同索引的对象进行算术运算。
+        - 在算术方法中填充值
+            - add方法中的fill_value参数，会将NA值进行填充
+            - 在对Series或DataFrame重新索引时，也可以指定一个填充值
+            - add 用于加法
+            - sub 用于减法
+            - div 用于除法
+            - mul 用于乘法
+    - DataFrame和Series之间的运算
+        - 广播：广播一般发生在两种情况，一种是两个数组的维度不相等，
+        - 默认情况下，DataFrame和Series之间的算术运算会将Series的索引匹配到DataFrame的列，然后沿着行一直向下广播
+        - 如果某个索引值在DataFrame的列或Series的索引中找到不到，则参与运算的两个对象就会被重新索引以形成并集
+    - 函数应用和映射
+        - numpy的ufuncs（元素级数组方法）也可以用于操作pandas对象
+
+    - 排序和排名
+        - sort_index方法，将返回一个已排序的新对象
+        - 在DataFrame中sort_index可以在任意轴上进行
+        - axis=0指的是逐行，axis=1指的是逐列
+        - 数据是默认是按照升序排序的，可以添加ascending=False进行降序排序
+        - 若要按值对Series进行排序，可使用其order方法（python3.6之后就没有order属性了，可以用sort_values属性进行排序）
+        - 在排序时，任何缺失值默认都会被放到Series的末尾
+        - 在DataFrame上，可以根据一个或者多个列中的值进行排序。将一个或者多个列的名字传给by选项即可达到目的。
+        - 要根据多个列进行排序，传入名称的列表即可
+    - 带有重复值的轴索引
+        - 索引的is_unique属性可以告诉你他的值是否是唯一的
+        - 如果某个索引对应多个值，则返回一个Series；而对应单个值的，则返回一个标量值
+    - 汇总和计算描述统计
+        - pandas对象拥有一组常用的数学和统计方法。
+        - nan为not a num
+        - 调用df.sum()方法将会返回一个含有列小计的Series
+        - 传入axis=1将会按行进行求和运算
+        - Na值会自动被排除，除非整个切片都是Na
+        - idxmin和idxmax返回的是间接统计，（返回值最大的那一个索引）
+        - describe可以一次性产生多个汇总统计
+        - 对于非数值型数据，describe会产生另外一种汇总统计
+    - 唯一值、值计数以及成员资格
+        - unique返回的唯一值是未排序的，可以对结果进行再次排序uniques.sort()
+        - value_counts用于计算一个Series中各值出现的频率
+        - 为便于查看，Series是按值频率降序排序的。value_counts还是一个顶级的pandas方法
+        - isin，判断矢量化集合的成员资格，可用于选取Series中或DataFrame列中数据的子集
+    - 处理缺失数据
+        - pandas使用浮点值NaN表示浮点和非浮点数组中的缺失数据。
+        - python内置的None值也会被当作NA处理
+    - 滤除缺失数据
+        - dropna返回一个仅含非空数据和索引值的Series
+        - 对于DataFrame对象，dropna默认丢弃任何含有缺失值的行
+        - how = 'all'参数将只丢弃全为NA的那些行
+        - axis可以传入参数=1，将在列方向进行删除
+        - 可以利用ix进行切片赋值NA
+    - 填充缺失数据
+        - 当不想过滤缺失数据，fillna是主要的函数
+        - 若通过一个字典用fillna，就可以实现对不同的列填充不同的值
+        - fillna默认会返回新对象，可以使用inplace=True参数对现有对象进行就地修改
+        - reindex有效的插值方法也可以用于fillna
+    - 层次化索引
+        - 他能使在一个轴上拥有多个索引级别，能以低纬度形式处理高维度数据
+        - 可以使用unstack重新安排到一个DataFrame中
+        - unstack的逆运算是stack
+    - 重排分级顺序
+        - swaplevel接受两个级别编号或名称，并返回一个互换了级别的新对象（但数据不会发生变化）
+        - sortlevel根据单个级别中的值对数据进行排序。交换级别时，会用到sortlevel，使最终结果变为有序。
+    - 根据级别汇总统计
+        - 可以根据行或列上的级别来进行求和
+        - 相当于pandas的groupby功能
+    - 使用DataFrame的列
+        - 将DataFrame的一个或多个列当作行索引来使用，或者将行索引变成DataFrame的列。
+        - DataFrame的set_index函数会将其一个或多个列转换为行索引。并创建一个新的DataFrame
+        - 默认情况下，那些列会从DataFrame中移除，但可以使用drop=False参数进行保留
+        - reset_index的功能跟set_index相反，层次化索引的级别会被转移到列中
+    - 整数索引
+        - 如果需要可靠的，不考虑索引类型的，基于位置的索引，可以使用Series的iget_value 方法和DataFrame的irow和icol方法
+    - 面板数据
+        - pandas有一个panel数据结构，用于三维数据（不常用）
+
+- 数据加载、存储与文件格式
+    - 输入和输出可以划分为：读取文本文件和其它高效的磁盘存储格式、加载数据库中的数据，利用web api操作网络资源
+    - 读写文本格式的数据
+        - read_csv 从文件、url、文件型对象中加载带分隔符的数据。默认符为逗号
+        - read_table 同上，默认分隔符为制表符
+        - read_fwf 读取定宽列格式数据（也就是说，没有分割符）
+        - read_clipboard 读取剪贴板中的数据，可以看作read_table的剪贴板版，在将网页转换为表格时很有用
+
+    - 类型判断（type inference）是这些函数中最重要的功能之一，
+    - 可以使用skiprows跳过文件的不需要行
+    - 默认情况下，pandas会用一组经常出现的标记值进行识别，如NA、-1、#IND以及NULL等：
+    - na_values可以接受一组用于表示缺失值的字符串
+    - 逐块读取文本文件
+        - 如果只想读取几行，通过nrows进行指定即可
+        - 要逐块读取文件，需要设置chunsize(行数)
+        - read_csv所返回的这个TextParse对象是你可以根据chunksize对文件进行逐块迭代。
+        - TextParse还有一个get_chunk方法，可以读取任意大小的块
+    - 将数据写出到文本格式
+        - DataFrame的to_csv方法，可以将数据写到一个以逗号分隔的文件中
+        - 可以使用其它分隔符，sys.stdout可以直接写出到控制台
+        - 缺失值在输出结果中会被表示为空字符串，可以使用na_rep参数可以将其表示为别的标记值
+        - 如果没有设置其它选项，则会写出行和列的标签。使用index=False，header=False可以将其禁用
+        - 可以只写出一部分的列，并以指定的顺序排列cols = []
+
+
+- JSON数据
+    - 通过json.loads即可将JSON字符串转换成Python形式
+    - 通过json.dumps则将Python对象转换为JSON形式
+- XML和HTML：Web信息收集
+    - 利用lxml.objectify解析XML，通过getroot得到该文件的根节点的引用
+
+- 二进制数据格式
+    - pandas对象都有一个用于将数据以pickle形式保存到磁盘上的save方法
+- 使用HDF5格式
+    - HDF5中的HDF指的是层次型数据格式。
+    - 如需处理海量数据，可以使用PyTables和h5py。
+- 读取Microsoft Excel文件
+    - pd.ExcelFile(文件名)
+        - xls_file = pd.ExcelFile('data.xls')
+    - 通过parse（'表格名'）读取到DataFrame中
+        - table = xls_file.parse('Sheet1')
+- 合并数据集
+    - pandas.merge可根据一个或多个键将不同的DataFrame中的行连接起来。
+    - pandas.concat可以沿着一条轴将多个对象堆叠到一起
+    - 实例方法combine_first可以将重复数据编结在一起
+    - pd.merge(data1,data2),多对一的合并。没有指明特定列进行连接的话，默认会将重叠列的列名当作键。on = 'key'
+    - 如果两个对象的列名不同，也可以分别进行指定。left_on = '1key',right_on = '2key'
+    - 默认情况下，merge做的是inner连接，其它方式还有how = 'left','right','outer'，外连接求的是键的并集。
+    - 要根据多个键进行合并，传入一个由列名组成的列表即可
+    - 索引上的合并
+        - 当DataFrame中的连接键位于其索引中时，可以传入left_index = True或right_index = True以说明索引应该被用作连接键
+        - DataFrame还有一个Join实例方法，他能实现按索引合并。合并多个带有相同或相似索引的DataFrame对象，不管之间是否有重叠的列。
+    - 轴向连接
+        - Numpy有一个用于合并原始Numpy数组的concatenation函数：
+        - pandas的concat函数可将Series进行轴向连接
+        - 使用keys参数可以再连接轴上创建一个层次化索引
+        -
+
+- 数据聚合与分组计算
+    - 根据一个或者多个键（可以是函数、数组或DataFrame列名）拆分pandas对象
+    - 计算分组摘要统计，如计数、平均值、标准差、或用户自定义函数
+    - 对DataFrame的列应用各种各样的函数
+    - 应用组内转化或其它运算，如规格化、线性回归、排名或者选取子集
+    - 计算透视表或者交叉表
+    - 执行分位数分析以及其它分组分析
+- 对分组进行迭代
+    - 对于由DataFrame长生的GroupBy对象，如果用一个（单个字符串）或一组（字符串数列）列名对其索引，就能实现选取部分列进行聚合的目的
+    - 如果传入的是列表或数组或数组，则返回的对象是一个已分组的DataFrame
+    - 如果传入的是标量形式的单个列名，则返回的对象是一个已分组的Series
+
+
+
+
+
+
+
+
+
+

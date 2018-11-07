@@ -164,4 +164,36 @@
     - 返回的数据一般都是json格式
     - 案例16
     - 案例18
+- 结构数据：先有的结构，再有数据
+    - Json文件
+        - Json Path
+        - 转换成Python类型进行操作（json类）
 
+    - XML文件
+        - 转换成python类型（xmltodict）
+        - XPath
+        - CSS选择器
+        - 正则
+- 非结构化数据：先有数据，再有结构
+    - 文本
+    - 电话号码
+    - 邮箱地址
+        - 通常处理此类数据，使用正则表达式
+
+- XML
+    - XML（EXtensibleMarkupLanguage）
+    - http://www.w3school.com.cn/xml/index.asp
+- lxml库
+    - python的html/xml解析器
+    - 官方文档：http://lxml.de/index.html
+    - 功能：
+        - 解析HTML
+        - 文件读取
+        - etree和xpath的配合使用
+- CSS选择器 BeautifulSoup4
+    - 现在大多数使用BeautifulSoup4
+    - http://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/
+    - 几个常用提取信息工具的比较：
+        - 正则：快，难，无需安装
+        - beatifulsoup:慢，简单，需要安装
+        - lxml：快，简单，需要安装（略麻烦）

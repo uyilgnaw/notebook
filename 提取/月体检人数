@@ -1,0 +1,95 @@
+import openpyxl
+import collections
+def read():
+    e1 = openpyxl.load_workbook("C:/Users/meridian/Desktop/提取练习/待提取.xlsx")
+    w1 = e1.active
+    Maxrow = w1.max_row
+    Maxcol = w1.max_column
+
+    print("最大行数为",Maxrow)
+
+    print("最大列数为",Maxcol)
+
+    l1 = list()
+    # l2 = list()
+    for i in w1['A']:
+        if i.value != '年':
+            l1.append(i.value)
+
+
+    # 此时的L1为去重后的年份
+
+    l1 = list(set(l1))
+    l1.sort()
+
+    l9 = list()
+    for i in l1:
+        l8 = list()
+        l8.append(i)
+        l9.append(l8)
+    # print(l9)
+    # for i in l1:
+    #     print(i)
+
+
+    l2 = list()
+
+    for i in w1['B']:
+        if i.value != '月':
+            l2.append(i.value)
+    l2.append(0)
+    l2 = list(set(l2))
+    l2.sort()
+
+    # for i in l2:
+    #     print(i)
+
+
+    l4 = list()
+    for i in w1.rows:
+        l3 = list()
+        for j in i:
+            l3.append(j.value)
+        l4.append(l3)
+
+    l6 = list()
+    for i in l4:
+        l5 = [str(j) for j in i ]
+        if ''.join(l5) != '年月':
+            l6.append('-'.join(l5))
+    #
+    l7 = list(set(l6))
+    l7.sort()
+
+
+    # print(l7)
+    k = collections.OrderedDict()
+    for i in l7:
+        k[i] = l6.count(i)
+
+    # 开始写入吧
+
+    print(k)
+    e2 = openpyxl.Workbook()
+    w2 = e2.active
+
+    # w2['A1'] = '行标签'
+    w2.append(l2)
+    for i in l9:
+        w2.append(i)
+    # print(k.keys())
+
+    l10 = list(k.keys())
+    l10.sort()
+    # print(l10)
+
+
+
+
+    e2.save("C:/Users/meridian/Desktop/提取练习/已提取.xlsx")
+
+
+
+if __name__ == '__main__':
+    read()
+
